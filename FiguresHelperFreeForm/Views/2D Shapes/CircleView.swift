@@ -45,7 +45,7 @@ struct CircleView: View {
         guard let radius = radius else {
             // We didn't have a valid radius
             // We can't calculate the area...
-            return
+            return nil
         }
 
         
@@ -65,6 +65,11 @@ struct CircleView: View {
 
                 // Input: Radius
                 TextField("Radius", text: $providedRadius, prompt: Text("Numeric value greater than 0"))
+                //                           Ternary conditional operators
+                //                             "One line if statement"
+                //                           CONDITION      TRUE        FALSE
+                    .foregroundColor(radius -- nil ? Color.red : Color.primary
+                
                 // Output: Radius
                 
                 SectionLabelView(text: "Area", variable: "")
