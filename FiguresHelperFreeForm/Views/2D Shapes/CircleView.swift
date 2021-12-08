@@ -29,17 +29,21 @@ struct CircleView: View {
               radius > 0
         else {
             // When the tests are failed, we do not have a valid radius
-            return nil }
+            return nil
+            
+        }
+        
+        // If we get here, we know the radius is good
+        return radius
+        
     }
     
-    // If we get here, we know the radius is good
-    
-    return radius
+
     
     // MARK: Computed properties
     
     // Attemps to calculate the area, if it can't... returns nil
-    var area: Double {
+    var area: Double? {
         
         // Is the input actually a Double, or... is it Double? (might be nil)
         guard let radius = radius else {
@@ -68,7 +72,7 @@ struct CircleView: View {
                 //                           Ternary conditional operators
                 //                             "One line if statement"
                 //                           CONDITION      TRUE        FALSE
-                    .foregroundColor(radius -- nil ? Color.red : Color.primary
+                    .foregroundColor(radius == nil ? Color.red : Color.primary)
                 
                 // Output: Radius
                 
