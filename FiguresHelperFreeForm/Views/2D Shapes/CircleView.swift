@@ -37,9 +37,21 @@ struct CircleView: View {
     return radius
     
     // MARK: Computed properties
+    
+    // Attemps to calculate the area, if it can't... returns nil
     var area: Double {
+        
+        // Is the input actually a Double, or... is it Double? (might be nil)
+        guard let radius = radius else {
+            // We didn't have a valid radius
+            // We can't calculate the area...
+            return
+        }
+
+        
         return Double.pi * radius * radius
     }
+    
     
     var body: some View {
         ScrollView {
