@@ -38,10 +38,6 @@ struct CircleView: View {
         
     }
     
-
-    
-    // MARK: Computed properties
-    
     // Attemps to calculate the area, if it can't... returns nil
     var area: Double? {
         
@@ -51,7 +47,7 @@ struct CircleView: View {
             // We can't calculate the area...
             return nil
         }
-
+        
         
         return Double.pi * radius * radius
     }
@@ -66,7 +62,7 @@ struct CircleView: View {
                             horizontalPadding: 50)
                 
                 SectionLabelView(text: "Radius", variable: "r")
-
+                
                 // Input: Radius
                 TextField("Radius", text: $providedRadius, prompt: Text("Numeric value greater than 0"))
                 //                           Ternary conditional operators

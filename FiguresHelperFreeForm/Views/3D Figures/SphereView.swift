@@ -10,12 +10,43 @@ import SwiftUI
 struct SphereView: View {
     
     // MARK: Stored properties
-    @State var radius = 10.0
+    @State var providedRadius = ""
     
-    // MARK: Computed properties
-    var surfaceArea: Double {
+    //MARK: Computed Properties
+    var radius: Double? {
+        // Tests of the provided input
+        // 1. Ensure that we can simply change the input into a double
+        // 2. Ensure that the value as a double is more than 0
+        
+        // With a guard statement, we list the things we want to be true, and provide an action to carry out when those conditions are not met.
+        
+        guard let radius = Double(providedRadius),
+              radius > 0
+        else {
+            // When the tests are failed, we do not have a valid radius
+            return nil
+            
+        }
+        
+        // If we get here, we know the radius is good
+        return radius
+        
+    }
+    
+    var surfaceArea: Double? {
+        
+        // Is the input actually a Double, or... is it Double? (might be nil)
+        guard let radius = radius else {
+            // We didn't have a valid radius
+            // We can't calculate the area...
+            return nil
+        }
+        
+        
         return 4 * Double.pi * radius * radius
     }
+    
+    // MARK: Computed properties
     
     var body: some View {
         ScrollView {
@@ -26,23 +57,17 @@ struct SphereView: View {
                             horizontalPadding: 50)
                 
                 SectionLabelView(text: "Radius", variable: "r")
-
+                
                 // Input: Radius
-                Slider(value: $radius,
-                       in: 0.0...100.0,
-                       step: 0.1,
-                       label: {
-                    Text("Radius")
-                },
-                       minimumValueLabel: {
-                    Text("0")
-                },
-                       maximumValueLabel: {
-                    Text("100")
-                })
+                
+                TextField("Radius", text: $providedRadius, prompt: Text("Numeric value greater than 0"))
+                //                           Ternary conditional operators
+                //                             "One line if statement"
+                //                           CONDITION      TRUE        FALSE
+                    .foregroundColor(radius == nil ? Color.red : Color.primary)
                 
                 // Output: Radius
-                SliderValueView(value: radius)
+                
                 
                 SectionLabelView(text: "Surface Area", variable: "")
                 
